@@ -13,8 +13,8 @@ function ProductThumb({ product }: { product: Product }) {
         isOutOfStock ? "opacity-50" : ""
       }`}
     >
-      helloladkugzavk
-      <div className="rekative aspect-square w-full h-full overflow-hidden">
+      
+      <div className="relative aspect-square w-full h-full overflow-hidden">
         {product.image && (
           <Image
             className="object-contain transition-transform duration-300 group-hover:scale-105"
@@ -41,10 +41,13 @@ function ProductThumb({ product }: { product: Product }) {
     {product.description
       ?.map((block) =>
         block._type === "block"
-          ? block.children?.map((child) => child.text).join(" ")
-          : "***"
+          ? block.children?.map((child) => child.text).join("")
+          : ""
       )
       .join(" ") || "No description available"}
+  </p>
+  <p className="mt-2 text-lg font-bold text-gray-900">
+      RS{product.price?.toFixed(2)}
   </p>
 </div>
 
