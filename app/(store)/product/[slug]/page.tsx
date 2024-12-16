@@ -6,11 +6,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 async function ProductPage({
-     params,
+     params
      }: {
          params: Promise<{
          slug: string;
-         }>;
+         }>
          }) {
     const { slug } = await params;
     const product = await getProductBySlug(slug);
@@ -18,7 +18,7 @@ async function ProductPage({
     if (!product) {
         return notFound();
     }
-    const isOutOfStock = product.stock !== null && product.stock <= 0;
+    const isOutOfStock = product.stock != null && product.stock <= 0;
 
 return (
   <div className="container mx-auto px-4 py-8">
@@ -55,6 +55,14 @@ return (
       )}
     </div>
   </div>
+<div className="mt-6">
+  <AddToBasketButton product={product} disabled={isOutOfStock} />
+  
+</div>
+
+
+
+
 </div>
 
     </div>
