@@ -4,7 +4,7 @@ import { sanityFetch } from "../live";  // Import your custom sanity fetch utili
 // Define the query to fetch products by category
 export const getProductsByCategory = async (categorySlug: string) => {
   const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`
-    *[_type == "product" && references(*[_type == "category" && slug.current == $categorySlug]._id)] 
+    *[_type == "products" && references(*[_type == "category" && slug.current == $categorySlug]._id)] 
     | order(name asc)
   `);
 
