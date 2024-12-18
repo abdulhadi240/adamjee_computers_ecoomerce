@@ -1,5 +1,6 @@
 "use server";
 
+import { imageUrl } from "@/lib/imageUrl";
 import { BasketItem } from "@/store/store";
 
 // Define Metadata and GroupedBasketItem types
@@ -18,53 +19,38 @@ export type GroupedBasketItem = {
 
 // Function to simulate order creation and handle errors
 export async function createCheckoutSession(
-  items: GroupedBasketItem[],
+  items: GroupedBasketItem[],  // Fix: Correct type definition (should be an array)
   metadata: Metadata
 ) {
   try {
-    // 1. Check for user login status
-    if (!metadata.clerkUserId) {
-      throw new Error("You must be logged in to place an order.");
-    }
-
-    // 2. Validate product prices
     const itemsWithoutPrice = items.filter((item) => !item.product.price);
+    
     if (itemsWithoutPrice.length > 0) {
-      throw new Error("Some items in your basket are missing a price.");
+      throw new Error("Some items do not have a price");
     }
 
-    // 3. Set default payment method if not specified
-    const updatedMetadata: Metadata = {
-      ...metadata,
-      paymentMethod: metadata.paymentMethod || "Cash on Delivery",
-    };
+    const orderData = items.map((item) => ({
+      product_data: {
+        name: item.product.name || "Unnamed Product",
+        description: `Product ID: ${item.product._id}`,
+        metadata: {
+          id: item.product._id,
+        },
+        images: item.product.image
+          ? [imageUrl(item.product.image).url()]
+          : undefined,
+      },
+      quantity: item.quantity,
+    }));
 
-    // 4. Simulate order processing (e.g., saving to database or calling a backend API)
-    console.log("✅ Creating order...");
-    console.log("Order Details:");
-    console.table({
-      OrderNumber: updatedMetadata.orderNumber,
-      Customer: updatedMetadata.customerName,
-      Email: updatedMetadata.customerEmail,
-      Payment: updatedMetadata.paymentMethod,
-    });
+    // Here, you would typically handle the order data, such as saving to a database or further processing.
+    console.log("Order Data:", orderData);
 
-    // Fake delay for realistic processing
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Simulate successful order URL (or redirect as needed)
+    return `/order-success?orderNumber=${metadata.orderNumber}`;
 
-    // 5. Return success response
-    return {
-      status: "success",
-      message: `🎉 Thank you, ${updatedMetadata.customerName}! Your order #${updatedMetadata.orderNumber} has been placed successfully.`,
-    };
-    
-  } catch (error: any) {
-    console.error("🚨 Error during checkout:", error.message);
-
-    // Return structured error response for better debugging
-    return {
-      status: "error",
-      message: error.message || "Something went wrong during checkout.",
-    };
+  } catch (error) {
+    console.error("Error creating checkout session:", error);
+    throw error;  // Rethrow the error to be handled at a higher level
   }
 }
