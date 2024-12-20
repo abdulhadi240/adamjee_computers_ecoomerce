@@ -23,12 +23,21 @@ export async function createCheckoutSession(
   metadata: Metadata
 ) {
   try {
+    // Validation for required fields
+    if (!metadata.orderNumber || !metadata.customerName || !metadata.customerEmail || !metadata.paymentMethod) {
+      throw new Error("Missing required metadata fields");
+    }
+
+    if (items.length === 0) {
+      throw new Error("No items in the order");
+    }
+
     const itemsWithoutPrice = items.filter((item) => !item.product.price);
-    
     if (itemsWithoutPrice.length > 0) {
       throw new Error("Some items do not have a price");
     }
 
+    // Map order data
     const orderData = items.map((item) => ({
       product_data: {
         name: item.product.name || "Unnamed Product",
@@ -43,10 +52,10 @@ export async function createCheckoutSession(
       quantity: item.quantity,
     }));
 
-    // Here, you would typically handle the order data, such as saving to a database or further processing.
+    // Simulate successful order URL (or redirect as needed)
     console.log("Order Data:", orderData);
 
-    // Simulate successful order URL (or redirect as needed)
+    // Here, you would typically handle the order data, such as saving to a database or further processing.
     return `/order-success?orderNumber=${metadata.orderNumber}`;
 
   } catch (error) {

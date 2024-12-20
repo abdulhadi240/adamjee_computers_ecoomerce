@@ -21,6 +21,7 @@
     "@sanity/schema": "^3.67.1",
     "@sanity/types": "^3.67.1",
     "@sanity/vision": "^3.67.1",
+    "@types/swiper": "^5.4.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -33,6 +34,7 @@
     "react-is": "^19.0.0",
     "sanity": "^3.67.1",
     "styled-components": "^6.1.13",
+    "swiper": "^11.1.15",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "zustand": "^5.0.2"
