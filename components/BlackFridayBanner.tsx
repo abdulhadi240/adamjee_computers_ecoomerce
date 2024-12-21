@@ -1,8 +1,8 @@
 import { COUPON_CODES } from "@/sanity/lib/sales/couponCodes";
 import { getActiveSaleByCouponCode } from "@/sanity/lib/sales/getActiveSaleByCouponCode";
-import Slider from "./Slider"; // Import the Slider component
+import Slider from "./Slider";
 
-async function BlackFridayBanner() {
+export default async function BlackFridayBanner() {
   const sale = await getActiveSaleByCouponCode(COUPON_CODES.BFRIDAY);
 
   if (!sale?.isActive) {
@@ -10,39 +10,36 @@ async function BlackFridayBanner() {
   }
 
   return (
-    <div className="bg-white text-[#1f2937] px-0 py-0 mx-auto mt-1 rounded-xl shadow-xl relative overflow-hidden transform transition-all duration-500 ease-in-out hover:scale-105">
-      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between space-y-0 sm:space-y-0 sm:space-x-1">
-        {/* Left side: Text section */}
-        <div className="flex-1 sm:flex-[0.4] text-center sm:text-left">
-          <h2 className="text-3xl sm:text-3xl font-extrabold mb-2 text-[#1f2937] transition-all duration-300 ease-in-out transform hover:text-[#9333ea]">
-            {sale.title}
+    <div className="bg-white text-gray-900 px-6 py-8 mx-auto mt-4 rounded-xl shadow-2xl relative overflow-hidden transition-transform duration-300 transform hover:scale-105 max-w-6xl">
+      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between space-y-6 sm:space-y-0">
+        {/* Left Side: Text */}
+        <div className="flex-1 text-center sm:text-left">
+          {/* Black Friday Title with Gradient Mix of Blue */}
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-teal-500 mb-3">
+            Black Friday
           </h2>
-          <p className="text-base sm:text-xl font-semibold mb-2 text-[#4b5563] transition-all duration-300 ease-in-out transform hover:text-[#1f2937]">
-            {sale.description}
+          
+          {/* Description */}
+          <p className="text-xl font-semibold text-gray-700 mb-4">
+            Welcome to this year's largest sale!
           </p>
-          <div className="flex justify-center sm:justify-start">
-            <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-1 px-4 sm:px-5 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-[#2563eb] relative z-10">
-              <span className="font-bold text-xl sm:text-xl">
-                Use code:{" "}
-                <span className="text-red-500">{sale.couponCode}</span>
-              </span>
-              <span className="ml-2 font-bold text-lg sm:text-xl">
-                for {sale.discountAmount}% OFF
-              </span>
-            </div>
+          
+          {/* Use Code Button with Gradient and Hover Effect */}
+          <div className="bg-gradient-to-r from-blue-600 to-teal-500 text-white py-2 px-6 rounded-full shadow-lg hover:from-blue-700 hover:to-teal-600 transition-all duration-300 hover:scale-105 inline-flex items-center space-x-3">
+            <span className="font-bold text-sm sm:text-base">
+              Use code: <span className="font-extrabold text-white">{sale.couponCode}</span>
+            </span>
+            <span className="font-bold text-sm sm:text-base">
+              for {sale.discountAmount}% OFF
+            </span>
           </div>
         </div>
 
-        {/* Right side: Image Slider */}
-        <div className="flex-1 sm:flex-[0.6] mt-4 sm:mt-0 relative w-full sm:max-w-2xl rounded-lg overflow-hidden shadow-xl">
-          <Slider /> {/* Add the Slider component here */}
+        {/* Right Side: Slider */}
+        <div className="flex-1 w-full rounded-xl shadow-lg overflow-hidden">
+          <Slider />
         </div>
       </div>
-
-      {/* Decorative diagonal line for added flair */}
-      <div className="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-r from-indigo-600 to-purple-600 transform rotate-6 skew-y-6 z-0"></div>
     </div>
   );
 }
-
-export default BlackFridayBanner;

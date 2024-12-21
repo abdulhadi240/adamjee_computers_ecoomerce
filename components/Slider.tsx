@@ -1,36 +1,68 @@
 'use client';
-
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 
 const Slider = () => {
-  const swiperRef = useRef<any>(null); // Create a ref to access Swiper instance
+  const swiperRef = useRef<any>(null); // Ref to access Swiper instance
+  const [isAutoplayActive, setIsAutoplayActive] = useState(true); // Track autoplay status
+  const slideIntervalRef = useRef<any>(null); // Store interval ID for autoplay
 
-  // Handle custom navigation
   const goToPrev = () => {
     swiperRef.current.swiper.slidePrev(); // Go to previous slide
+    resetAutoplay(); // Reset autoplay timer
   };
 
   const goToNext = () => {
     swiperRef.current.swiper.slideNext(); // Go to next slide
+    resetAutoplay(); // Reset autoplay timer
   };
+
+  // Custom autoplay function
+  const startAutoplay = () => {
+    slideIntervalRef.current = setInterval(() => {
+      if (swiperRef.current) {
+        swiperRef.current.swiper.slideNext(); // Go to next slide
+      }
+    }, 6000); // Auto-slide every 5 seconds
+  };
+
+  // Reset autoplay timer whenever the user interacts with the slider
+  const resetAutoplay = () => {
+    if (slideIntervalRef.current) {
+      clearInterval(slideIntervalRef.current); // Clear the previous interval
+    }
+    if (isAutoplayActive) {
+      startAutoplay(); // Restart the autoplay timer
+    }
+  };
+
+  // Start the autoplay when the component mounts
+  useEffect(() => {
+    startAutoplay();
+
+    return () => {
+      if (slideIntervalRef.current) {
+        clearInterval(slideIntervalRef.current); // Clean up interval on component unmount
+      }
+    };
+  }, [isAutoplayActive]);
 
   return (
     <div className="relative w-full h-full rounded-lg shadow-lg overflow-hidden">
       <Swiper
-        ref={swiperRef} // Attach ref to the Swiper instance
-        spaceBetween={0} // No gap between slides
+        ref={swiperRef}
+        spaceBetween={0}
         slidesPerView={1}
-        autoplay={{ delay: 6000 }} // Auto-slide every 6 seconds
-        loop={true} // Infinite loop
+        loop={true}
         className="w-full h-full"
+        onSlideChange={resetAutoplay} // Reset autoplay when user interacts
       >
         {/* Slide 1 */}
         <SwiperSlide>
           <div className="relative w-full h-full">
             <img
-              src="/mouse.jpg" // Ensure correct path
+              src="/Apple.webp"
               alt="Black Friday Deals"
               className="w-full h-full object-cover rounded-lg transform transition-all duration-500 hover:scale-105"
             />
@@ -40,12 +72,11 @@ const Slider = () => {
             </div>
           </div>
         </SwiperSlide>
-
         {/* Slide 2 */}
         <SwiperSlide>
           <div className="relative w-full h-full">
             <img
-              src="/img.jpg" // Ensure correct path
+              src="/all.png"
               alt="Exclusive Offers"
               className="w-full h-full object-cover rounded-lg transform transition-all duration-500 hover:scale-105"
             />
@@ -56,17 +87,16 @@ const Slider = () => {
           </div>
         </SwiperSlide>
       </Swiper>
-
       {/* Custom Navigation Buttons */}
       <button
         className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-gray-700"
-        onClick={goToPrev} // Bind the goToPrev function to this button
+        onClick={goToPrev}
       >
         &#10094;
       </button>
       <button
         className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-gray-700"
-        onClick={goToNext} // Bind the goToNext function to this button
+        onClick={goToNext}
       >
         &#10095;
       </button>
