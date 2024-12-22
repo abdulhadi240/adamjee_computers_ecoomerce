@@ -25,8 +25,9 @@ const Header = () => {
             Feedback & Suggestions
           </Link>
           <Link href="/contact" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
-            Contact Us
-          </Link>
+  Contact Us
+</Link>
+
           <Link href="/faqs" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
             FAQs
           </Link>
