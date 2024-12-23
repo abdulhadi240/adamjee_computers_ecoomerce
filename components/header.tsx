@@ -18,10 +18,10 @@ const Header = () => {
       {/* Upper section: Navigation links & Account section */}
       <div className="container mx-auto flex justify-between items-center text-sm font-medium flex-wrap">
         <div className="flex space-x-4 flex-wrap justify-center sm:justify-start w-full sm:w-auto">
-          <Link href="/computer-zone" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
+          <Link href="/about" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
             About Shopr
           </Link>
-          <Link href="/feedback" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
+          <Link href="/feedbacks" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
             Feedback & Suggestions
           </Link>
           <Link href="/contact" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
@@ -31,7 +31,7 @@ const Header = () => {
           <Link href="/faqs" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
             FAQs
           </Link>
-          <Link href="/policies" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
+          <Link href="/Policies" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
             Policies
           </Link>
         </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaRegLightbulb, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import Link from 'next/link'; // Import Link for Next.js routing
 
 const Footer: React.FC = () => {
   return (
@@ -88,19 +89,27 @@ const Footer: React.FC = () => {
             links: ["Sign Up", "My Account", "Shopping Cart", "Order History"],
           }, {
             title: "CORPORATE",
-            links: ["About Us", "Contact", "FAQs", "Policies"],
+            links: [
+              <Link href="/about" key="about">
+                About Us
+              </Link>,
+              <Link href="/contact" key="contact">
+                Contact
+              </Link>,
+              <Link href="/faqs" key="faqs">
+                FAQs
+              </Link>,
+              <Link href="/Policies" key="policies">
+                Policies
+              </Link>,
+            ],
           }].map((section, index) => (
             <div key={index} className="w-1/2 sm:w-1/3 mb-4 sm:mb-0">
               <h3 className="text-gray-100 font-semibold mb-2">{section.title}</h3>
               <ul className="space-y-1">
                 {section.links.map((link, i) => (
                   <li key={i}>
-                    <a
-                      href="#"
-                      className="text-gray-300 hover:text-blue-300 transition-all duration-200"
-                    >
-                      {link}
-                    </a>
+                    {link}
                   </li>
                 ))}
               </ul>
@@ -130,7 +139,7 @@ const Footer: React.FC = () => {
                   href="tel:+923001234567"
                   className="text-gray-300 hover:text-blue-300"
                 >
-                  +92 300 123 4567
+                  +92 300 000 0000
                 </a>
               </span>
             </li>
