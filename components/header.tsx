@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header className="bg-gradient-to-r from-blue-500 to-teal-400 text-white py-3 shadow-lg">
       {/* Upper section: Navigation links & Account section */}
-      <div className="container mx-auto flex justify-between items-center text-sm font-medium flex-wrap">
+      <div className="container mx-auto px-6 flex justify-between items-center text-sm font-medium flex-wrap">
         <div className="flex space-x-4 flex-wrap justify-center sm:justify-start w-full sm:w-auto">
           <Link href="/about" className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
             About Shopr
@@ -54,7 +54,7 @@ const Header = () => {
                 </button>
               </SignInButton>
               <SignInButton mode="modal">
-                <button className="hover:text-gray-300 transition-colors ease-in-out duration-300 text-sm">
+                <button className="hover:text-gray-300 px-1 transition-colors ease-in-out duration-300 text-sm">
                   Create Account
                 </button>
               </SignInButton>
@@ -68,7 +68,7 @@ const Header = () => {
 
       {/* Main section: Logo, Search bar, Basket, and Orders */}
       <div className="container mx-auto flex justify-between items-center mt-4 space-x-4 flex-wrap">
-        <Link href="/" className="text-3xl font-semibold text-white hover:text-gray-200 transition-colors ease-in-out duration-300 shadow-md">
+        <Link href="/" className="text-3xl font-semibold px-6 text-white hover:text-gray-200 transition-colors ease-in-out duration-300 shadow-md">
           Shopr
         </Link>
 
@@ -93,7 +93,7 @@ const Header = () => {
         </form>
 
         {/* Basket and Orders */}
-        <div className="flex items-center space-x-4 mt-3 sm:mt-0 flex-wrap justify-center sm:justify-end w-full sm:w-auto">
+        <div className="flex items-center space-x-4 mt-3 px-6 sm:mt-0 flex-wrap justify-center sm:justify-end w-full sm:w-auto">
           <Link
             href="/basket"
             className="flex relative items-center space-x-3 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white font-semibold py-2 px-4 rounded-full transition-all ease-in-out duration-300"

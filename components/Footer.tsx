@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
         <div className="w-full sm:w-1/4 mb-6 sm:mb-0">
           <h1 className="text-xl font-bold text-gray-100">Shopr</h1>
           <p className="text-gray-300 mt-2 leading-relaxed">
-            Your trusted online store for computers and accessories in Pakistan.
+            Your trusted online store for computers <br /> and accessories in Pakistan.
           </p>
         </div>
 
