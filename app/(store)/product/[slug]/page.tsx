@@ -23,13 +23,12 @@ async function ProductPage({
 
   return (
     <div className="container mx-auto px-6 py-8">
-      {/* Main Grid Container */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
         
         {/* Product Image */}
         <div
           className={`relative flex justify-center items-center overflow-hidden rounded-xl shadow-lg ${isOutOfStock ? "opacity-50" : ""}`}
-          style={{ height: '350px', width: '100%' }} // Adjusted size
+          style={{ height: '300px' }} // Adjusted size
         >
           {product.image && (
             <Image
@@ -37,31 +36,31 @@ async function ProductPage({
               alt={product.name ?? "Product image"}
               layout="fill"
               objectFit="contain"
-              className="transition-transform duration-300 hover:scale-105"
+              className="transition-transform duration-300 transform hover:scale-105"
             />
           )}
         </div>
 
         {/* Product Details */}
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col justify-between space-y-4">
           <div>
             {/* Product Name */}
-            <h1 className="text-3xl font-semibold text-gray-800 mb-2">{product.name}</h1>
+            <h1 className="text-2xl font-semibold text-gray-800">{product.name}</h1>
 
             {/* Price */}
-            <div className="text-xl font-medium text-gray-600 mb-4">
+            <div className="text-lg font-medium text-gray-600">
               Rs: {product.price?.toFixed(2)}
             </div>
 
             {/* Product Description */}
-            <div className="prose text-gray-600 mb-6">
+            <div className="prose text-gray-600">
               {Array.isArray(product.description) && (
                 <PortableText value={product.description} />
               )}
             </div>
 
             {/* Stock Status */}
-            <div className="flex items-center mb-6">
+            <div className="flex items-center">
               <span
                 className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${isOutOfStock ? 'bg-red-500' : 'bg-green-500'}`}
               >
@@ -91,14 +90,14 @@ async function ProductPage({
           </div>
 
           {/* Add to Cart Button */}
-          <div className="mt-6 ">
+          <div className="mt-4">
             <AddToBasketButton product={product} disabled={isOutOfStock} />
           </div>
         </div>
       </div>
 
       {/* Divider Line */}
-      <div className="mt-8 border-t-2 border-gray-300 opacity-40 w-full"></div>
+      <div className="mt-6 border-t-2 border-gray-300 opacity-40 w-full"></div>
     </div>
   );
 }
